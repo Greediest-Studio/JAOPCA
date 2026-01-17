@@ -6,144 +6,140 @@ import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
-import thelm.com.electronwill.nightconfig.core.CommentedConfig;
+
+import com.electronwill.nightconfig.core.CommentedConfig;
 
 public interface IDynamicSpecConfig extends CommentedConfig {
-  String getDefinedString(String paramString1, String paramString2, String paramString3);
-  
-  String getDefinedString(List<String> paramList, String paramString1, String paramString2);
-  
-  String getDefinedString(String paramString1, String paramString2, Collection<String> paramCollection, String paramString3);
-  
-  String getDefinedString(List<String> paramList, String paramString1, Collection<String> paramCollection, String paramString2);
-  
-  String getDefinedString(String paramString1, String paramString2, Predicate<String> paramPredicate, String paramString3);
-  
-  String getDefinedString(List<String> paramList, String paramString1, Predicate<String> paramPredicate, String paramString2);
-  
-  List<String> getDefinedStringList(String paramString1, List<String> paramList, String paramString2);
-  
-  List<String> getDefinedStringList(List<String> paramList1, List<String> paramList2, String paramString);
-  
-  List<String> getDefinedStringList(String paramString1, List<String> paramList, Collection<String> paramCollection, String paramString2);
-  
-  List<String> getDefinedStringList(List<String> paramList1, List<String> paramList2, Collection<String> paramCollection, String paramString);
-  
-  List<String> getDefinedStringList(String paramString1, List<String> paramList, Predicate<String> paramPredicate, String paramString2);
-  
-  List<String> getDefinedStringList(List<String> paramList1, List<String> paramList2, Predicate<String> paramPredicate, String paramString);
-  
-  boolean getDefinedBoolean(String paramString1, boolean paramBoolean, String paramString2);
-  
-  boolean getDefinedBoolean(List<String> paramList, boolean paramBoolean, String paramString);
-  
-  Number getDefinedNumber(String paramString1, Number paramNumber, String paramString2);
-  
-  Number getDefinedNumber(List<String> paramList, Number paramNumber, String paramString);
-  
-  Number getDefinedNumber(String paramString1, Number paramNumber, Predicate<Number> paramPredicate, String paramString2);
-  
-  Number getDefinedNumber(List<String> paramList, Number paramNumber, Predicate<Number> paramPredicate, String paramString);
-  
-  int getDefinedInt(String paramString1, int paramInt, String paramString2);
-  
-  int getDefinedInt(List<String> paramList, int paramInt, String paramString);
-  
-  int getDefinedInt(String paramString1, int paramInt1, int paramInt2, int paramInt3, String paramString2);
-  
-  int getDefinedInt(List<String> paramList, int paramInt1, int paramInt2, int paramInt3, String paramString);
-  
-  int getDefinedInt(String paramString1, int paramInt, IntPredicate paramIntPredicate, String paramString2);
-  
-  int getDefinedInt(List<String> paramList, int paramInt, IntPredicate paramIntPredicate, String paramString);
-  
-  long getDefinedLong(String paramString1, long paramLong, String paramString2);
-  
-  long getDefinedLong(List<String> paramList, long paramLong, String paramString);
-  
-  long getDefinedLong(String paramString1, long paramLong1, long paramLong2, long paramLong3, String paramString2);
-  
-  long getDefinedLong(List<String> paramList, long paramLong1, long paramLong2, long paramLong3, String paramString);
-  
-  long getDefinedLong(String paramString1, long paramLong, LongPredicate paramLongPredicate, String paramString2);
-  
-  long getDefinedLong(List<String> paramList, long paramLong, LongPredicate paramLongPredicate, String paramString);
-  
-  float getDefinedFloat(String paramString1, float paramFloat, String paramString2);
-  
-  float getDefinedFloat(List<String> paramList, float paramFloat, String paramString);
-  
-  float getDefinedFloat(String paramString1, float paramFloat1, float paramFloat2, float paramFloat3, String paramString2);
-  
-  float getDefinedFloat(List<String> paramList, float paramFloat1, float paramFloat2, float paramFloat3, String paramString);
-  
-  float getDefinedFloat(String paramString1, float paramFloat, Predicate<Float> paramPredicate, String paramString2);
-  
-  float getDefinedFloat(List<String> paramList, float paramFloat, Predicate<Float> paramPredicate, String paramString);
-  
-  double getDefinedDouble(String paramString1, double paramDouble, String paramString2);
-  
-  double getDefinedDouble(List<String> paramList, double paramDouble, String paramString);
-  
-  double getDefinedDouble(String paramString1, double paramDouble1, double paramDouble2, double paramDouble3, String paramString2);
-  
-  double getDefinedDouble(List<String> paramList, double paramDouble1, double paramDouble2, double paramDouble3, String paramString);
-  
-  double getDefinedDouble(String paramString1, double paramDouble, DoublePredicate paramDoublePredicate, String paramString2);
-  
-  double getDefinedDouble(List<String> paramList, double paramDouble, DoublePredicate paramDoublePredicate, String paramString);
-  
-  byte getDefinedByte(String paramString1, byte paramByte, String paramString2);
-  
-  byte getDefinedByte(List<String> paramList, byte paramByte, String paramString);
-  
-  byte getDefinedByte(String paramString1, byte paramByte1, byte paramByte2, byte paramByte3, String paramString2);
-  
-  byte getDefinedByte(List<String> paramList, byte paramByte1, byte paramByte2, byte paramByte3, String paramString);
-  
-  byte getDefinedByte(String paramString1, byte paramByte, Predicate<Byte> paramPredicate, String paramString2);
-  
-  byte getDefinedByte(List<String> paramList, byte paramByte, Predicate<Byte> paramPredicate, String paramString);
-  
-  short getDefinedShort(String paramString1, short paramShort, String paramString2);
-  
-  short getDefinedShort(List<String> paramList, short paramShort, String paramString);
-  
-  short getDefinedShort(String paramString1, short paramShort1, short paramShort2, short paramShort3, String paramString2);
-  
-  short getDefinedShort(List<String> paramList, short paramShort1, short paramShort2, short paramShort3, String paramString);
-  
-  short getDefinedShort(String paramString1, short paramShort, Predicate<Short> paramPredicate, String paramString2);
-  
-  short getDefinedShort(List<String> paramList, short paramShort, Predicate<Short> paramPredicate, String paramString);
-  
-  char getDefinedChar(String paramString1, char paramChar, String paramString2);
-  
-  char getDefinedChar(List<String> paramList, char paramChar, String paramString);
-  
-  char getDefinedChar(String paramString1, char paramChar, Collection<Character> paramCollection, String paramString2);
-  
-  char getDefinedChar(List<String> paramList, char paramChar, Collection<Character> paramCollection, String paramString);
-  
-  char getDefinedChar(String paramString1, char paramChar, Predicate<Character> paramPredicate, String paramString2);
-  
-  char getDefinedChar(List<String> paramList, char paramChar, Predicate<Character> paramPredicate, String paramString);
-  
-  <T extends Enum<T>> T getDefinedEnum(List<String> paramList, Class<T> paramClass, T paramT, String paramString);
-  
-  <T extends Enum<T>> T getDefinedEnum(String paramString1, Class<T> paramClass, T paramT, String paramString2);
-  
-  <T extends Enum<T>> T getDefinedEnum(List<String> paramList, Class<T> paramClass, T paramT, Collection<T> paramCollection, String paramString);
-  
-  <T extends Enum<T>> T getDefinedEnum(String paramString1, Class<T> paramClass, T paramT, Collection<T> paramCollection, String paramString2);
-  
-  <T extends Enum<T>> T getDefinedEnum(List<String> paramList, Class<T> paramClass, T paramT, Predicate<T> paramPredicate, String paramString);
-  
-  <T extends Enum<T>> T getDefinedEnum(String paramString1, Class<T> paramClass, T paramT, Predicate<T> paramPredicate, String paramString2);
+
+	String getDefinedString(String path, String defaultValue, String comment);
+
+	String getDefinedString(List<String> path, String defaultValue, String comment);
+
+	String getDefinedString(String path, String defaultValue, Collection<String> validValues, String comment);
+
+	String getDefinedString(List<String> path, String defaultValue, Collection<String> validValues, String comment);
+
+	String getDefinedString(String path, String defaultValue, Predicate<String> validator, String comment);
+
+	String getDefinedString(List<String> path, String defaultValue, Predicate<String> validator, String comment);
+
+	List<String> getDefinedStringList(String path, List<String> defaultValue, String comment);
+
+	List<String> getDefinedStringList(List<String> path, List<String> defaultValue, String comment);
+
+	List<String> getDefinedStringList(String path, List<String> defaultValue, Collection<String> validValues, String comment);
+
+	List<String> getDefinedStringList(List<String> path, List<String> defaultValue, Collection<String> validValues, String comment);
+
+	List<String> getDefinedStringList(String path, List<String> defaultValue, Predicate<String> elementValidator, String comment);
+
+	List<String> getDefinedStringList(List<String> path, List<String> defaultValue, Predicate<String> elementValidator, String comment);
+
+	boolean getDefinedBoolean(String path, boolean defaultValue, String comment);
+
+	boolean getDefinedBoolean(List<String> path, boolean defaultValue, String comment);
+
+	Number getDefinedNumber(String path, Number defaultValue, String comment);
+
+	Number getDefinedNumber(List<String> path, Number defaultValue, String comment);
+
+	Number getDefinedNumber(String path, Number defaultValue, Predicate<Number> validator, String comment);
+
+	Number getDefinedNumber(List<String> path, Number defaultValue, Predicate<Number> validator, String comment);
+
+	int getDefinedInt(String path, int defaultValue, String comment);
+
+	int getDefinedInt(List<String> path, int defaultValue, String comment);
+
+	int getDefinedInt(String path, int defaultValue, int min, int max, String comment);
+
+	int getDefinedInt(List<String> path, int defaultValue, int min, int max, String comment);
+
+	int getDefinedInt(String path, int defaultValue, IntPredicate validator, String comment);
+
+	int getDefinedInt(List<String> path, int defaultValue, IntPredicate validator, String comment);
+
+	long getDefinedLong(String path, long defaultValue, String comment);
+
+	long getDefinedLong(List<String> path, long defaultValue, String comment);
+
+	long getDefinedLong(String path, long defaultValue, long min, long max, String comment);
+
+	long getDefinedLong(List<String> path, long defaultValue, long min, long max, String comment);
+
+	long getDefinedLong(String path, long defaultValue, LongPredicate validator, String comment);
+
+	long getDefinedLong(List<String> path, long defaultValue, LongPredicate validator, String comment);
+
+	float getDefinedFloat(String path, float defaultValue, String comment);
+
+	float getDefinedFloat(List<String> path, float defaultValue, String comment);
+
+	float getDefinedFloat(String path, float defaultValue, float min, float max, String comment);
+
+	float getDefinedFloat(List<String> path, float defaultValue, float min, float max, String comment);
+
+	float getDefinedFloat(String path, float defaultValue, Predicate<Float> validator, String comment);
+
+	float getDefinedFloat(List<String> path, float defaultValue, Predicate<Float> validator, String comment);
+
+	double getDefinedDouble(String path, double defaultValue, String comment);
+
+	double getDefinedDouble(List<String> path, double defaultValue, String comment);
+
+	double getDefinedDouble(String path, double defaultValue, double min, double max, String comment);
+
+	double getDefinedDouble(List<String> path, double defaultValue, double min, double max, String comment);
+
+	double getDefinedDouble(String path, double defaultValue, DoublePredicate validator, String comment);
+
+	double getDefinedDouble(List<String> path, double defaultValue, DoublePredicate validator, String comment);
+
+	byte getDefinedByte(String path, byte defaultValue, String comment);
+
+	byte getDefinedByte(List<String> path, byte defaultValue, String comment);
+
+	byte getDefinedByte(String path, byte defaultValue, byte min, byte max, String comment);
+
+	byte getDefinedByte(List<String> path, byte defaultValue, byte min, byte max, String comment);
+
+	byte getDefinedByte(String path, byte defaultValue, Predicate<Byte> validator, String comment);
+
+	byte getDefinedByte(List<String> path, byte defaultValue, Predicate<Byte> validator, String comment);
+
+	short getDefinedShort(String path, short defaultValue, String comment);
+
+	short getDefinedShort(List<String> path, short defaultValue, String comment);
+
+	short getDefinedShort(String path, short defaultValue, short min, short max, String comment);
+
+	short getDefinedShort(List<String> path, short defaultValue, short min, short max, String comment);
+
+	short getDefinedShort(String path, short defaultValue, Predicate<Short> validator, String comment);
+
+	short getDefinedShort(List<String> path, short defaultValue, Predicate<Short> validator, String comment);
+
+	char getDefinedChar(String path, char defaultValue, String comment);
+
+	char getDefinedChar(List<String> path, char defaultValue, String comment);
+
+	char getDefinedChar(String path, char defaultValue, Collection<Character> validValues, String comment);
+
+	char getDefinedChar(List<String> path, char defaultValue, Collection<Character> validValues, String comment);
+
+	char getDefinedChar(String path, char defaultValue, Predicate<Character> validator, String comment);
+
+	char getDefinedChar(List<String> path, char defaultValue, Predicate<Character> validator, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(List<String> path, Class<T> enumType, T defaultValue, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(String path, Class<T> enumType, T defaultValue, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(List<String> path, Class<T> enumType, T defaultValue, Collection<T> validValues, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(String path, Class<T> enumType, T defaultValue, Collection<T> validValues, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(List<String> path, Class<T> enumType, T defaultValue, Predicate<T> validator, String comment);
+
+	<T extends Enum<T>> T getDefinedEnum(String path, Class<T> enumType, T defaultValue, Predicate<T> validator, String comment);
 }
-
-
-/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\api\config\IDynamicSpecConfig.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

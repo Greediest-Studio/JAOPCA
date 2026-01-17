@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -12,49 +13,44 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public interface IMiscHelper {
-  ResourceLocation getRecipeKey(String paramString1, String paramString2);
-  
-  String getOredictName(String paramString1, String paramString2);
-  
-  String getFluidName(String paramString1, String paramString2);
-  
-  ItemStack getItemStack(Object paramObject, int paramInt);
-  
-  Ingredient getIngredient(Object paramObject);
-  
-  ItemStack getPreferredItemStack(Iterable<ItemStack> paramIterable, int paramInt);
-  
-  ItemStack resizeItemStack(ItemStack paramItemStack, int paramInt);
-  
-  FluidStack getFluidStack(Object paramObject, int paramInt);
-  
-  FluidStack resizeFluidStack(FluidStack paramFluidStack, int paramInt);
-  
-  Comparator<IForgeRegistryEntry<?>> entryPreferenceComparator();
-  
-  Predicate<String> metaItemPredicate();
-  
-  ItemStack parseMetaItem(String paramString);
-  
-  String toLowercaseUnderscore(String paramString);
-  
-  void caclulateMaterialSet(Collection<String> paramCollection1, Collection<String> paramCollection2);
-  
-  void caclulateModuleSet(Collection<String> paramCollection1, Collection<String> paramCollection2);
-  
-  Predicate<String> configMaterialPredicate();
-  
-  Predicate<String> configModulePredicate();
-  
-  Runnable conditionalRunnable(BooleanSupplier paramBooleanSupplier, Supplier<Runnable> paramSupplier1, Supplier<Runnable> paramSupplier2);
-  
-  <T> Supplier<T> conditionalSupplier(BooleanSupplier paramBooleanSupplier, Supplier<Supplier<T>> paramSupplier1, Supplier<Supplier<T>> paramSupplier2);
-  
-  boolean hasResource(ResourceLocation paramResourceLocation);
+
+	ResourceLocation getRecipeKey(String category, String material);
+
+	String getOredictName(String form, String material);
+
+	String getFluidName(String form, String material);
+
+	ItemStack getItemStack(Object obj, int count);
+
+	Ingredient getIngredient(Object obj);
+
+	ItemStack getPreferredItemStack(Iterable<ItemStack> iterable, int count);
+
+	ItemStack resizeItemStack(ItemStack stack, int size);
+
+	FluidStack getFluidStack(Object obj, int amount);
+
+	FluidStack resizeFluidStack(FluidStack stack, int amount);
+
+	Comparator<IForgeRegistryEntry<?>> entryPreferenceComparator();
+
+	Predicate<String> metaItemPredicate();
+
+	ItemStack parseMetaItem(String str);
+
+	String toLowercaseUnderscore(String camelCase);
+
+	void caclulateMaterialSet(Collection<String> configList, Collection<String> actualSet);
+
+	void caclulateModuleSet(Collection<String> configList, Collection<String> actualSet);
+
+	Predicate<String> configMaterialPredicate();
+
+	Predicate<String> configModulePredicate();
+
+	Runnable conditionalRunnable(BooleanSupplier conditionSupplier, Supplier<Runnable> trueRunnable, Supplier<Runnable> falseRunnable);
+
+	<T> Supplier<T> conditionalSupplier(BooleanSupplier conditionSupplier, Supplier<Supplier<T>> trueSupplier, Supplier<Supplier<T>> falseSupplier);
+
+	boolean hasResource(ResourceLocation location);
 }
-
-
-/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\api\helpers\IMiscHelper.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

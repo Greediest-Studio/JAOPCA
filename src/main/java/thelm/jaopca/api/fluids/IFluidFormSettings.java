@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumRarity;
@@ -13,89 +14,84 @@ import thelm.jaopca.api.forms.IFormSettings;
 import thelm.jaopca.api.materials.IMaterial;
 
 public interface IFluidFormSettings extends IFormSettings {
-  IFluidFormSettings setFluidCreator(IFluidCreator paramIFluidCreator);
-  
-  IFluidCreator getFluidCreator();
-  
-  IFluidFormSettings setFillSoundSupplier(Supplier<SoundEvent> paramSupplier);
-  
-  Supplier<SoundEvent> getFillSoundSupplier();
-  
-  IFluidFormSettings setEmptySoundSupplier(Supplier<SoundEvent> paramSupplier);
-  
-  Supplier<SoundEvent> getEmptySoundSupplier();
-  
-  IFluidFormSettings setLuminosityFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getLuminosityFunction();
-  
-  IFluidFormSettings setDensityFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getDensityFunction();
-  
-  IFluidFormSettings setTemperatureFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getTemperatureFunction();
-  
-  IFluidFormSettings setViscosityFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getViscosityFunction();
-  
-  IFluidFormSettings setOpacityFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getOpacityFunction();
-  
-  IFluidFormSettings setIsGaseousFunction(Predicate<IMaterial> paramPredicate);
-  
-  Predicate<IMaterial> getIsGaseousFunction();
-  
-  IFluidFormSettings setDisplayRarityFunction(Function<IMaterial, EnumRarity> paramFunction);
-  
-  Function<IMaterial, EnumRarity> getDisplayRarityFunction();
-  
-  IFluidFormSettings setFluidBlockCreator(IFluidBlockCreator paramIFluidBlockCreator);
-  
-  IFluidBlockCreator getFluidBlockCreator();
-  
-  IFluidFormSettings setMaxLevelFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getMaxLevelFunction();
-  
-  IFluidFormSettings setMaterialFunction(Function<IMaterial, Material> paramFunction);
-  
-  Function<IMaterial, Material> getMaterialFunction();
-  
-  IFluidFormSettings setMapColorFunction(Function<IMaterial, MapColor> paramFunction);
-  
-  Function<IMaterial, MapColor> getMapColorFunction();
-  
-  IFluidFormSettings setBlockHardnessFunction(ToDoubleFunction<IMaterial> paramToDoubleFunction);
-  
-  ToDoubleFunction<IMaterial> getBlockHardnessFunction();
-  
-  IFluidFormSettings setExplosionResistanceFunction(ToDoubleFunction<IMaterial> paramToDoubleFunction);
-  
-  ToDoubleFunction<IMaterial> getExplosionResistanceFunction();
-  
-  IFluidFormSettings setFlammabilityFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getFlammabilityFunction();
-  
-  IFluidFormSettings setFireSpreadSpeedFunction(ToIntFunction<IMaterial> paramToIntFunction);
-  
-  ToIntFunction<IMaterial> getFireSpreadSpeedFunction();
-  
-  IFluidFormSettings setIsFireSourceFunction(Predicate<IMaterial> paramPredicate);
-  
-  Predicate<IMaterial> getIsFireSourceFunction();
-  
-  IFluidFormSettings setFluidBlockModelMapCreator(IFluidBlockModelMapCreator paramIFluidBlockModelMapCreator);
-  
-  IFluidBlockModelMapCreator getFluidBlockModelMapCreator();
+
+	IFluidFormSettings setFluidCreator(IFluidCreator fluidCreator);
+
+	IFluidCreator getFluidCreator();
+
+	IFluidFormSettings setFillSoundSupplier(Supplier<SoundEvent> fillSoundSupplier);
+
+	Supplier<SoundEvent> getFillSoundSupplier();
+
+	IFluidFormSettings setEmptySoundSupplier(Supplier<SoundEvent> emptySoundSupplier);
+
+	Supplier<SoundEvent> getEmptySoundSupplier();
+
+	IFluidFormSettings setLuminosityFunction(ToIntFunction<IMaterial> luminosityFunction);
+
+	ToIntFunction<IMaterial> getLuminosityFunction();
+
+	IFluidFormSettings setDensityFunction(ToIntFunction<IMaterial> densityFunction);
+
+	ToIntFunction<IMaterial> getDensityFunction();
+
+	IFluidFormSettings setTemperatureFunction(ToIntFunction<IMaterial> temperatureFunction);
+
+	ToIntFunction<IMaterial> getTemperatureFunction();
+
+	IFluidFormSettings setViscosityFunction(ToIntFunction<IMaterial> viscosityFunction);
+
+	ToIntFunction<IMaterial> getViscosityFunction();
+
+	IFluidFormSettings setOpacityFunction(ToIntFunction<IMaterial> opacityFunction);
+
+	ToIntFunction<IMaterial> getOpacityFunction();
+
+	IFluidFormSettings setIsGaseousFunction(Predicate<IMaterial> isGaseousFunction);
+
+	Predicate<IMaterial> getIsGaseousFunction();
+
+	IFluidFormSettings setDisplayRarityFunction(Function<IMaterial, EnumRarity> displayRarityFunction);
+
+	Function<IMaterial, EnumRarity> getDisplayRarityFunction();
+
+	IFluidFormSettings setFluidBlockCreator(IFluidBlockCreator fluidBlockCreator);
+
+	IFluidBlockCreator getFluidBlockCreator();
+
+	IFluidFormSettings setMaxLevelFunction(ToIntFunction<IMaterial> maxLevelFunction);
+
+	ToIntFunction<IMaterial> getMaxLevelFunction();
+
+	IFluidFormSettings setMaterialFunction(Function<IMaterial, Material> materialFunction);
+
+	Function<IMaterial, Material> getMaterialFunction();
+
+	IFluidFormSettings setMapColorFunction(Function<IMaterial, MapColor> mapColorFunction);
+
+	Function<IMaterial, MapColor> getMapColorFunction();
+
+	IFluidFormSettings setBlockHardnessFunction(ToDoubleFunction<IMaterial> blockHardnessFunction);
+
+	ToDoubleFunction<IMaterial> getBlockHardnessFunction();
+
+	IFluidFormSettings setExplosionResistanceFunction(ToDoubleFunction<IMaterial> explosionResistanceFunction);
+
+	ToDoubleFunction<IMaterial> getExplosionResistanceFunction();
+
+	IFluidFormSettings setFlammabilityFunction(ToIntFunction<IMaterial> flammabilityFunction);
+
+	ToIntFunction<IMaterial> getFlammabilityFunction();
+
+	IFluidFormSettings setFireSpreadSpeedFunction(ToIntFunction<IMaterial> fireSpreadSpeedFunction);
+
+	ToIntFunction<IMaterial> getFireSpreadSpeedFunction();
+
+	IFluidFormSettings setIsFireSourceFunction(Predicate<IMaterial> isFireSourceFunction);
+
+	Predicate<IMaterial> getIsFireSourceFunction();
+
+	IFluidFormSettings setFluidBlockModelMapCreator(IFluidBlockModelMapCreator fluidBlockModelMapCreator);
+
+	IFluidBlockModelMapCreator getFluidBlockModelMapCreator();
 }
-
-
-/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\api\fluids\IFluidFormSettings.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */
