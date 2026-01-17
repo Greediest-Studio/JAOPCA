@@ -1,74 +1,82 @@
-package thelm.jaopca.compat.railcraft.recipes;
+//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\yxy24\Desktop\Minecraft-Deobfuscator3000-master\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+/*    */ package thelm.jaopca.compat.railcraft.recipes;
+/*    */ 
+/*    */ import java.util.ArrayList;
+/*    */ import java.util.Arrays;
+/*    */ import java.util.List;
+/*    */ import java.util.Objects;
+/*    */ import mods.railcraft.api.crafting.Crafters;
+/*    */ import mods.railcraft.api.crafting.IRockCrusherCrafter;
+/*    */ import net.minecraft.item.ItemStack;
+/*    */ import net.minecraft.item.crafting.Ingredient;
+/*    */ import net.minecraft.util.ResourceLocation;
+/*    */ import org.apache.commons.lang3.tuple.Pair;
+/*    */ import org.apache.logging.log4j.LogManager;
+/*    */ import org.apache.logging.log4j.Logger;
+/*    */ import thelm.jaopca.api.recipes.IRecipeAction;
+/*    */ import thelm.jaopca.utils.MiscHelper;
+/*    */ 
+/*    */ 
+/*    */ public class RockCrusherRecipeAction
+/*    */   implements IRecipeAction
+/*    */ {
+/* 22 */   private static final Logger LOGGER = LogManager.getLogger();
+/*    */   
+/*    */   public final ResourceLocation key;
+/*    */   public final Object input;
+/*    */   public final int time;
+/*    */   public final Object[] output;
+/*    */   
+/*    */   public RockCrusherRecipeAction(ResourceLocation key, Object input, int time, Object... output) {
+/* 30 */     this.key = Objects.<ResourceLocation>requireNonNull(key);
+/* 31 */     this.input = input;
+/* 32 */     this.time = time;
+/* 33 */     this.output = output;
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public boolean register() {
+/* 38 */     Ingredient ing = MiscHelper.INSTANCE.getIngredient(this.input);
+/* 39 */     if (ing == null) {
+/* 40 */       throw new IllegalArgumentException("Empty ingredient in recipe " + this.key + ": " + this.input);
+/*    */     }
+/* 42 */     List<Pair<ItemStack, Float>> outputs = new ArrayList<>();
+/* 43 */     int i = 0;
+/* 44 */     while (i < this.output.length) {
+/* 45 */       Object out = this.output[i];
+/* 46 */       i++;
+/* 47 */       Integer count = Integer.valueOf(1);
+/* 48 */       if (i < this.output.length && this.output[i] instanceof Integer) {
+/* 49 */         count = (Integer)this.output[i];
+/* 50 */         i++;
+/*    */       } 
+/* 52 */       Float chance = Float.valueOf(1.0F);
+/* 53 */       if (i < this.output.length && this.output[i] instanceof Float) {
+/* 54 */         chance = (Float)this.output[i];
+/* 55 */         i++;
+/*    */       } 
+/* 57 */       ItemStack stack = MiscHelper.INSTANCE.getItemStack(out, count.intValue());
+/* 58 */       if (stack.isEmpty()) {
+/* 59 */         LOGGER.warn("Empty output in recipe {}: {}", this.key, out);
+/*    */         continue;
+/*    */       } 
+/* 62 */       outputs.add(Pair.of(stack, chance));
+/*    */     } 
+/* 64 */     if (outputs.isEmpty()) {
+/* 65 */       throw new IllegalArgumentException("Empty outputs in recipe " + this.key + ": " + Arrays.deepToString(this.output));
+/*    */     }
+/* 67 */     IRockCrusherCrafter.IRockCrusherRecipeBuilder builder = (IRockCrusherCrafter.IRockCrusherRecipeBuilder)((IRockCrusherCrafter.IRockCrusherRecipeBuilder)Crafters.rockCrusher().makeRecipe(ing).name(this.key)).time(this.time);
+/* 68 */     for (Pair<ItemStack, Float> out : outputs) {
+/* 69 */       builder.addOutput((ItemStack)out.getLeft(), ((Float)out.getRight()).floatValue());
+/*    */     }
+/* 71 */     builder.register();
+/* 72 */     return true;
+/*    */   }
+/*    */ }
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import mods.railcraft.api.crafting.Crafters;
-import mods.railcraft.api.crafting.IRockCrusherCrafter;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import thelm.jaopca.api.recipes.IRecipeAction;
-import thelm.jaopca.utils.MiscHelper;
-
-public class RockCrusherRecipeAction implements IRecipeAction {
-
-	private static final Logger LOGGER = LogManager.getLogger();
-
-	public final ResourceLocation key;
-	public final Object input;
-	public final int time;
-	public final Object[] output;
-
-	public RockCrusherRecipeAction(ResourceLocation key, Object input, int time, Object... output) {
-		this.key = Objects.requireNonNull(key);
-		this.input = input;
-		this.time = time;
-		this.output = output;
-	}
-
-	@Override
-	public boolean register() {
-		Ingredient ing = MiscHelper.INSTANCE.getIngredient(input);
-		if(ing == null) {
-			throw new IllegalArgumentException("Empty ingredient in recipe "+key+": "+input);
-		}
-		List<Pair<ItemStack, Float>> outputs = new ArrayList<>();
-		int i = 0;
-		while(i < output.length) {
-			Object out = output[i];
-			++i;
-			Integer count = 1;
-			if(i < output.length && output[i] instanceof Integer) {
-				count = (Integer)output[i];
-				++i;
-			}
-			Float chance = 1F;
-			if(i < output.length && output[i] instanceof Float) {
-				chance = (Float)output[i];
-				++i;
-			}
-			ItemStack stack = MiscHelper.INSTANCE.getItemStack(out, count);
-			if(stack.isEmpty()) {
-				LOGGER.warn("Empty output in recipe {}: {}", key, out);
-				continue;
-			}
-			outputs.add(Pair.of(stack, chance));
-		}
-		if(outputs.isEmpty()) {
-			throw new IllegalArgumentException("Empty outputs in recipe "+key+": "+Arrays.deepToString(output));
-		}
-		IRockCrusherCrafter.IRockCrusherRecipeBuilder builder = Crafters.rockCrusher().makeRecipe(ing).name(key).time(time);
-		for(Pair<ItemStack, Float> out : outputs) {
-			builder.addOutput(out.getLeft(), out.getRight());
-		}
-		builder.register();
-		return true;
-	}
-}
+/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\compat\railcraft\recipes\RockCrusherRecipeAction.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

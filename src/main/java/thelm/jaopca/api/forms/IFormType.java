@@ -1,36 +1,58 @@
-package thelm.jaopca.api.forms;
+/*    */ package thelm.jaopca.api.forms;
+/*    */ 
+/*    */ import com.google.gson.GsonBuilder;
+/*    */ import com.google.gson.JsonDeserializationContext;
+/*    */ import com.google.gson.JsonElement;
+/*    */ import java.util.Set;
+/*    */ import thelm.jaopca.api.materialforms.IMaterialFormInfo;
+/*    */ import thelm.jaopca.api.materials.IMaterial;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ public interface IFormType
+/*    */   extends Comparable<IFormType>
+/*    */ {
+/*    */   default void registerMaterialForms() {}
+/*    */   
+/*    */   default int compareTo(IFormType other) {
+/* 34 */     return getName().compareTo(other.getName());
+/*    */   }
+/*    */   
+/*    */   String getName();
+/*    */   
+/*    */   void addForm(IForm paramIForm);
+/*    */   
+/*    */   Set<IForm> getForms();
+/*    */   
+/*    */   boolean shouldRegister(IForm paramIForm, IMaterial paramIMaterial);
+/*    */   
+/*    */   IFormSettings getNewSettings();
+/*    */   
+/*    */   GsonBuilder configureGsonBuilder(GsonBuilder paramGsonBuilder);
+/*    */   
+/*    */   IFormSettings deserializeSettings(JsonElement paramJsonElement, JsonDeserializationContext paramJsonDeserializationContext);
+/*    */   
+/*    */   IMaterialFormInfo getMaterialFormInfo(IForm paramIForm, IMaterial paramIMaterial);
+/*    */ }
 
-import java.util.Set;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-
-import thelm.jaopca.api.materialforms.IMaterialFormInfo;
-import thelm.jaopca.api.materials.IMaterial;
-
-public interface IFormType extends Comparable<IFormType> {
-
-	String getName();
-
-	void addForm(IForm form);
-
-	Set<IForm> getForms();
-
-	boolean shouldRegister(IForm form, IMaterial material);
-
-	IFormSettings getNewSettings();
-
-	GsonBuilder configureGsonBuilder(GsonBuilder builder);
-
-	IFormSettings deserializeSettings(JsonElement jsonElement, JsonDeserializationContext context);
-
-	IMaterialFormInfo getMaterialFormInfo(IForm form, IMaterial material);
-
-	default void registerMaterialForms() {}
-
-	@Override
-	default int compareTo(IFormType other) {
-		return getName().compareTo(other.getName());
-	}
-}
+/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\api\forms\IFormType.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

@@ -1,44 +1,50 @@
-package thelm.jaopca.modules.passive;
+/*    */ package thelm.jaopca.modules.passive;
+/*    */ 
+/*    */ import com.google.common.collect.ImmutableMap;
+/*    */ import java.util.Collections;
+/*    */ import java.util.List;
+/*    */ import java.util.Map;
+/*    */ import thelm.jaopca.api.forms.IForm;
+/*    */ import thelm.jaopca.api.forms.IFormRequest;
+/*    */ import thelm.jaopca.api.forms.IFormType;
+/*    */ import thelm.jaopca.api.materials.MaterialType;
+/*    */ import thelm.jaopca.api.modules.IModule;
+/*    */ import thelm.jaopca.api.modules.JAOPCAModule;
+/*    */ import thelm.jaopca.items.ItemFormType;
+/*    */ import thelm.jaopca.utils.ApiImpl;
+/*    */ 
+/*    */ @JAOPCAModule
+/*    */ public class GearModule
+/*    */   implements IModule
+/*    */ {
+/* 20 */   private final IForm gearForm = ApiImpl.INSTANCE.newForm(this, "gear", (IFormType)ItemFormType.INSTANCE)
+/* 21 */     .setMaterialTypes(MaterialType.NON_DUSTS);
+/*    */ 
+/*    */   
+/*    */   public String getName() {
+/* 25 */     return "gear";
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public boolean isPassive() {
+/* 30 */     return true;
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public List<IFormRequest> getFormRequests() {
+/* 35 */     return Collections.singletonList(this.gearForm.toRequest());
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public Map<String, String> getLegacyRemaps() {
+/* 40 */     ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
+/* 41 */     builder.put("gear", "gear");
+/* 42 */     return (Map<String, String>)builder.build();
+/*    */   }
+/*    */ }
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
-import com.google.common.collect.ImmutableMap;
-
-import thelm.jaopca.api.forms.IForm;
-import thelm.jaopca.api.forms.IFormRequest;
-import thelm.jaopca.api.materials.MaterialType;
-import thelm.jaopca.api.modules.IModule;
-import thelm.jaopca.api.modules.JAOPCAModule;
-import thelm.jaopca.items.ItemFormType;
-import thelm.jaopca.utils.ApiImpl;
-
-@JAOPCAModule
-public class GearModule implements IModule {
-
-	private final IForm gearForm = ApiImpl.INSTANCE.newForm(this, "gear", ItemFormType.INSTANCE).
-			setMaterialTypes(MaterialType.NON_DUSTS);
-
-	@Override
-	public String getName() {
-		return "gear";
-	}
-
-	@Override
-	public boolean isPassive() {
-		return true;
-	}
-
-	@Override
-	public List<IFormRequest> getFormRequests() {
-		return Collections.singletonList(gearForm.toRequest());
-	}
-
-	@Override
-	public Map<String, String> getLegacyRemaps() {
-		ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-		builder.put("gear", "gear");
-		return builder.build();
-	}
-}
+/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\modules\passive\GearModule.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

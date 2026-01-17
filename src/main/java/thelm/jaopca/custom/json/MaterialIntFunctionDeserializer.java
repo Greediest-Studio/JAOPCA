@@ -1,87 +1,93 @@
-package thelm.jaopca.custom.json;
+/*    */ package thelm.jaopca.custom.json;
+/*    */ 
+/*    */ import com.google.gson.JsonDeserializationContext;
+/*    */ import com.google.gson.JsonDeserializer;
+/*    */ import com.google.gson.JsonElement;
+/*    */ import com.google.gson.JsonObject;
+/*    */ import com.google.gson.JsonParseException;
+/*    */ import it.unimi.dsi.fastutil.objects.Object2IntMap;
+/*    */ import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
+/*    */ import java.lang.reflect.Type;
+/*    */ import java.util.Map;
+/*    */ import java.util.function.ToIntFunction;
+/*    */ import thelm.jaopca.api.config.IDynamicSpecConfig;
+/*    */ import thelm.jaopca.api.materials.IMaterial;
+/*    */ import thelm.jaopca.custom.CustomModule;
+/*    */ import thelm.jaopca.materials.Material;
+/*    */ import thelm.jaopca.materials.MaterialHandler;
+/*    */ import thelm.jaopca.utils.JsonHelper;
+/*    */ 
+/*    */ public class MaterialIntFunctionDeserializer
+/*    */   implements JsonDeserializer<ToIntFunction<IMaterial>>
+/*    */ {
+/* 23 */   public static final MaterialIntFunctionDeserializer INSTANCE = new MaterialIntFunctionDeserializer();
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */   
+/*    */   public ToIntFunction<IMaterial> deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+/* 29 */     JsonHelper jsonHelper = JsonHelper.INSTANCE;
+/* 30 */     JsonObject json = jsonHelper.getJsonObject(jsonElement, "object");
+/* 31 */     int defaultValue = jsonHelper.getInt(json, "default");
+/* 32 */     Object2IntRBTreeMap object2IntRBTreeMap = new Object2IntRBTreeMap();
+/* 33 */     object2IntRBTreeMap.defaultReturnValue(defaultValue);
+/* 34 */     if (json.has("materialTypes")) {
+/* 35 */       JsonObject materialTypesJson = jsonHelper.getJsonObject(json, "materialTypes");
+/* 36 */       for (Map.Entry<String, JsonElement> entry : (Iterable<Map.Entry<String, JsonElement>>)materialTypesJson.entrySet()) {
+/* 37 */         int materialTypeValue = jsonHelper.getInt(entry.getValue(), "element");
+/* 38 */         switch ((String)entry.getKey()) {
+/*    */           case "ingot":
+/* 40 */             MaterialHandler.getMaterials().stream()
+/* 41 */               .filter(m -> m.getType().isIngot())
+/* 42 */               .forEach(m -> map.put(m, materialTypeValue));
+/*    */           
+/*    */           case "gem":
+/* 45 */             MaterialHandler.getMaterials().stream()
+/* 46 */               .filter(m -> m.getType().isGem())
+/* 47 */               .forEach(m -> map.put(m, materialTypeValue));
+/*    */           
+/*    */           case "crystal":
+/* 50 */             MaterialHandler.getMaterials().stream()
+/* 51 */               .filter(m -> m.getType().isCrystal())
+/* 52 */               .forEach(m -> map.put(m, materialTypeValue));
+/*    */           
+/*    */           case "dust":
+/* 55 */             MaterialHandler.getMaterials().stream()
+/* 56 */               .filter(m -> m.getType().isDust())
+/* 57 */               .forEach(m -> map.put(m, materialTypeValue));
+/*    */         } 
+/*    */       
+/*    */       } 
+/*    */     } 
+/* 62 */     if (json.has("materials")) {
+/* 63 */       JsonObject materialsJson = jsonHelper.getJsonObject(json, "materials");
+/* 64 */       for (Map.Entry<String, JsonElement> entry : (Iterable<Map.Entry<String, JsonElement>>)materialsJson.entrySet()) {
+/* 65 */         if (MaterialHandler.containsMaterial(entry.getKey())) {
+/* 66 */           object2IntRBTreeMap.put(MaterialHandler.getMaterial(entry.getKey()), jsonHelper.getInt(entry.getValue(), "element"));
+/*    */         }
+/*    */       } 
+/*    */     } 
+/* 70 */     if (json.has("config") && 
+/* 71 */       jsonHelper.getBoolean(json, "config")) {
+/* 72 */       String comment, path = jsonHelper.getString(json, "path");
+/*    */       
+/* 74 */       if (json.has("comment")) {
+/* 75 */         comment = jsonHelper.getString(json, "comment");
+/*    */       } else {
+/*    */         
+/* 78 */         comment = "";
+/*    */       } 
+/* 80 */       CustomModule.instance.addCustomConfigDefiner((material, config) -> map.put(material, config.getDefinedInt(path, map.getInt(material), comment)));
+/*    */     } 
+/*    */ 
+/*    */ 
+/*    */     
+/* 85 */     return material -> map.getInt(material);
+/*    */   }
+/*    */ }
 
-import java.lang.reflect.Type;
-import java.util.Map;
-import java.util.function.ToIntFunction;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
-import thelm.jaopca.api.helpers.IJsonHelper;
-import thelm.jaopca.api.materials.IMaterial;
-import thelm.jaopca.custom.CustomModule;
-import thelm.jaopca.materials.MaterialHandler;
-import thelm.jaopca.utils.JsonHelper;
-
-public class MaterialIntFunctionDeserializer implements JsonDeserializer<ToIntFunction<IMaterial>> {
-
-	public static final MaterialIntFunctionDeserializer INSTANCE = new MaterialIntFunctionDeserializer();
-
-	private MaterialIntFunctionDeserializer() {}
-
-	@Override
-	public ToIntFunction<IMaterial> deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		IJsonHelper helper = JsonHelper.INSTANCE;
-		JsonObject json = helper.getJsonObject(jsonElement, "object");
-		int defaultValue = helper.getInt(json, "default");
-		Object2IntMap<IMaterial> map = new Object2IntRBTreeMap<>();
-		map.defaultReturnValue(defaultValue);
-		if(json.has("materialTypes")) {
-			JsonObject materialTypesJson = helper.getJsonObject(json, "materialTypes");
-			for(Map.Entry<String, JsonElement> entry : materialTypesJson.entrySet()) {
-				int materialTypeValue = helper.getInt(entry.getValue(), "element");
-				switch(entry.getKey()) {
-				case "ingot":
-					MaterialHandler.getMaterials().stream().
-					filter(m->m.getType().isIngot()).
-					forEach(m->map.put(m, materialTypeValue));
-					break;
-				case "gem":
-					MaterialHandler.getMaterials().stream().
-					filter(m->m.getType().isGem()).
-					forEach(m->map.put(m, materialTypeValue));
-					break;
-				case "crystal":
-					MaterialHandler.getMaterials().stream().
-					filter(m->m.getType().isCrystal()).
-					forEach(m->map.put(m, materialTypeValue));
-					break;
-				case "dust":
-					MaterialHandler.getMaterials().stream().
-					filter(m->m.getType().isDust()).
-					forEach(m->map.put(m, materialTypeValue));
-					break;
-				}
-			}
-		}
-		if(json.has("materials")) {
-			JsonObject materialsJson = helper.getJsonObject(json, "materials");
-			for(Map.Entry<String, JsonElement> entry : materialsJson.entrySet()) {
-				if(MaterialHandler.containsMaterial(entry.getKey())) {
-					map.put(MaterialHandler.getMaterial(entry.getKey()), helper.getInt(entry.getValue(), "element"));
-				}
-			}
-		}
-		if(json.has("config")) {
-			if(helper.getBoolean(json, "config")) {
-				String path = helper.getString(json, "path");
-				String comment;
-				if(json.has("comment")) {
-					comment = helper.getString(json, "comment");
-				}
-				else {
-					comment = "";
-				}
-				CustomModule.instance.addCustomConfigDefiner((material, config)->{
-					map.put(material, config.getDefinedInt(path, map.getInt(material), comment));
-				});
-			}
-		}
-		return material->map.getInt(material);
-	}
-}
+/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\custom\json\MaterialIntFunctionDeserializer.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

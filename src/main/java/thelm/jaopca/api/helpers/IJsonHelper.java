@@ -1,77 +1,81 @@
 package thelm.jaopca.api.helpers;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import java.lang.reflect.Type;
 
 public interface IJsonHelper {
-
-	boolean isString(JsonObject json, String memberName);
-
-	boolean isString(JsonElement json);
-
-	boolean isNumber(JsonObject json, String memberName);
-
-	boolean isNumber(JsonElement json);
-
-	boolean isBoolean(JsonObject json, String memberName);
-
-	boolean isJsonArray(JsonObject json, String memberName);
-
-	boolean isJsonPrimitive(JsonObject json, String memberName);
-
-	boolean hasField(JsonObject json, String memberName);
-
-	String getString(JsonElement json, String memberName);
-
-	String getString(JsonObject json, String memberName);
-
-	String getString(JsonObject json, String memberName, String fallback);
-
-	boolean getBoolean(JsonElement json, String memberName);
-
-	boolean getBoolean(JsonObject json, String memberName);
-
-	boolean getBoolean(JsonObject json, String memberName, boolean fallback);
-
-	double getDouble(JsonElement json, String memberName);
-
-	double getDouble(JsonObject json, String memberName);
-
-	double getDouble(JsonObject json, String memberName, double fallback);
-
-	int getInt(JsonElement json, String memberName);
-
-	int getInt(JsonObject json, String memberName);
-
-	int getInt(JsonObject json, String memberName, int fallback);
-
-	long getLong(JsonElement json, String memberName);
-
-	long getLong(JsonObject json, String memberName);
-
-	long getLong(JsonObject json, String memberName, int fallback);
-
-	JsonObject getJsonObject(JsonElement json, String memberName);
-
-	JsonObject getJsonObject(JsonObject json, String memberName);
-
-	JsonObject getJsonObject(JsonObject json, String memberName, JsonObject fallback);
-
-	JsonArray getJsonArray(JsonElement json, String memberName);
-
-	JsonArray getJsonArray(JsonObject json, String memberName);
-
-	JsonArray getJsonArray(JsonObject json, String memberName, JsonArray fallback);
-
-	<T> T deserializeType(JsonElement json, String memberName, JsonDeserializationContext context, Type typeOfT);
-
-	<T> T deserializeType(JsonObject json, String memberName, JsonDeserializationContext context, Type typeOfT);
-
-	<T> T deserializeType(JsonObject json, String memberName, T fallback, JsonDeserializationContext context, Type typeOfT);
-
-	String toSimpleString(JsonElement json);
+  boolean isString(JsonObject paramJsonObject, String paramString);
+  
+  boolean isString(JsonElement paramJsonElement);
+  
+  boolean isNumber(JsonObject paramJsonObject, String paramString);
+  
+  boolean isNumber(JsonElement paramJsonElement);
+  
+  boolean isBoolean(JsonObject paramJsonObject, String paramString);
+  
+  boolean isJsonArray(JsonObject paramJsonObject, String paramString);
+  
+  boolean isJsonPrimitive(JsonObject paramJsonObject, String paramString);
+  
+  boolean hasField(JsonObject paramJsonObject, String paramString);
+  
+  String getString(JsonElement paramJsonElement, String paramString);
+  
+  String getString(JsonObject paramJsonObject, String paramString);
+  
+  String getString(JsonObject paramJsonObject, String paramString1, String paramString2);
+  
+  boolean getBoolean(JsonElement paramJsonElement, String paramString);
+  
+  boolean getBoolean(JsonObject paramJsonObject, String paramString);
+  
+  boolean getBoolean(JsonObject paramJsonObject, String paramString, boolean paramBoolean);
+  
+  double getDouble(JsonElement paramJsonElement, String paramString);
+  
+  double getDouble(JsonObject paramJsonObject, String paramString);
+  
+  double getDouble(JsonObject paramJsonObject, String paramString, double paramDouble);
+  
+  int getInt(JsonElement paramJsonElement, String paramString);
+  
+  int getInt(JsonObject paramJsonObject, String paramString);
+  
+  int getInt(JsonObject paramJsonObject, String paramString, int paramInt);
+  
+  long getLong(JsonElement paramJsonElement, String paramString);
+  
+  long getLong(JsonObject paramJsonObject, String paramString);
+  
+  long getLong(JsonObject paramJsonObject, String paramString, int paramInt);
+  
+  JsonObject getJsonObject(JsonElement paramJsonElement, String paramString);
+  
+  JsonObject getJsonObject(JsonObject paramJsonObject, String paramString);
+  
+  JsonObject getJsonObject(JsonObject paramJsonObject1, String paramString, JsonObject paramJsonObject2);
+  
+  JsonArray getJsonArray(JsonElement paramJsonElement, String paramString);
+  
+  JsonArray getJsonArray(JsonObject paramJsonObject, String paramString);
+  
+  JsonArray getJsonArray(JsonObject paramJsonObject, String paramString, JsonArray paramJsonArray);
+  
+  <T> T deserializeType(JsonElement paramJsonElement, String paramString, JsonDeserializationContext paramJsonDeserializationContext, Type paramType);
+  
+  <T> T deserializeType(JsonObject paramJsonObject, String paramString, JsonDeserializationContext paramJsonDeserializationContext, Type paramType);
+  
+  <T> T deserializeType(JsonObject paramJsonObject, String paramString, T paramT, JsonDeserializationContext paramJsonDeserializationContext, Type paramType);
+  
+  String toSimpleString(JsonElement paramJsonElement);
 }
+
+
+/* Location:              C:\Users\yxy24\Desktop\JAOPCA-1.12.2-2.3.13.34.jar!\thelm\jaopca\api\helpers\IJsonHelper.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */
